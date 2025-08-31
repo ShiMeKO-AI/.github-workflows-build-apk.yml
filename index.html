@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RH Physio</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.6/css/pico.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="container-fluid">
+    <nav>
+      <ul>
+        <li><img src="assets/logo.svg" alt="Logo" class="logo" /></li>
+      </ul>
+      <ul>
+        <li>
+          <select id="langSelect">
+            <option value="pt">PT</option>
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+          </select>
+        </li>
+        <li><button id="loginBtn">Login</button></li>
+        <li><button id="logoutBtn" class="secondary" hidden>Sair</button></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <main class="container">
+    <section id="homeSection">
+      <h1 id="homeTitle">Bem-vindo à RH Physio</h1>
+      <p id="homeDesc">Gestão simples de clínicas e terapeutas.</p>
+      <button id="ctaEnter">Entrar</button>
+    </section>
+
+    <section id="authSection" hidden>
+      <h2 id="authTitle">Autenticação</h2>
+      <form id="loginForm">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required />
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required />
+        <button type="submit" id="loginSubmit">Login</button>
+        <button type="button" id="showRegister" class="secondary">Registar</button>
+        <button type="button" id="showReset" class="secondary">Reset Password</button>
+      </form>
+      <form id="registerForm" hidden>
+        <label for="registerEmail">Email</label>
+        <input type="email" id="registerEmail" required />
+        <label for="registerPassword">Password</label>
+        <input type="password" id="registerPassword" required />
+        <button type="submit" id="registerSubmit">Registar</button>
+        <button type="button" id="showLogin" class="secondary">Voltar</button>
+      </form>
+      <form id="resetForm" hidden>
+        <label for="resetEmail">Email</label>
+        <input type="email" id="resetEmail" required />
+        <button type="submit" id="resetSubmit">Enviar Link</button>
+        <button type="button" id="showLogin2" class="secondary">Voltar</button>
+      </form>
+    </section>
+
+    <section id="dashboardSection" hidden>
+      <h2>Dashboard</h2>
+      <nav id="dashTabs">
+        <ul>
+          <li><button data-tab="clinicsTab">Clínicas</button></li>
+          <li><button data-tab="therapistsTab">Terapeutas</button></li>
+          <li><button data-tab="cabinsTab">Cabines</button></li>
+          <li><button data-tab="planningTab">Planeamento</button></li>
+        </ul>
+      </nav>
+      <div id="clinicsTab" class="tab">
+        <h3>Clínicas</h3>
+        <ul id="clinicsList"></ul>
+        <form id="clinicForm">
+          <input type="hidden" id="clinicId" />
+          <label for="clinicName">Nome</label>
+          <input id="clinicName" required />
+          <label for="clinicCity">Cidade</label>
+          <input id="clinicCity" />
+          <label for="clinicCabins"># Cabines</label>
+          <input type="number" id="clinicCabins" />
+          <label for="clinicColor">Cor</label>
+          <input type="color" id="clinicColor" />
+          <button type="submit">Guardar</button>
+        </form>
+      </div>
+      <div id="therapistsTab" class="tab" hidden>
+        <h3>Terapeutas</h3>
+        <ul id="therapistsList"></ul>
+        <form id="therapistForm">
+          <input type="hidden" id="therapistId" />
+          <label for="therapistInitials">Iniciais</label>
+          <input id="therapistInitials" required />
+          <label for="therapistName">Nome</label>
+          <input id="therapistName" />
+          <label for="therapistPercent">Contrato %</label>
+          <input type="number" id="therapistPercent" />
+          <label for="therapistNotes">Notas</label>
+          <textarea id="therapistNotes"></textarea>
+          <button type="submit">Guardar</button>
+        </form>
+      </div>
+      <div id="cabinsTab" class="tab" hidden>
+        <h3>Cabines</h3>
+        <ul id="cabinsList"></ul>
+        <form id="cabinForm">
+          <input type="hidden" id="cabinId" />
+          <label for="cabinClinic">Clínica</label>
+          <select id="cabinClinic"></select>
+          <label for="cabinName">Nome</label>
+          <input id="cabinName" required />
+          <label><input type="checkbox" id="cabinActive" /> Ativa</label>
+          <button type="submit">Guardar</button>
+        </form>
+      </div>
+      <div id="planningTab" class="tab" hidden>
+        <h3>Planeamento Semanal</h3>
+        <label for="weekSelect">Semana que começa em</label>
+        <input type="date" id="weekSelect" />
+        <div id="planningGrid" class="planning-grid"></div>
+        <button id="exportCsv" class="secondary">Exportar CSV</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <a href="#" id="privacyLink">Política de Privacidade</a>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>

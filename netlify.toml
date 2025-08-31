@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[headers]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; connect-src https://*.supabase.co https://*.supabase.in; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' data:;"
+    Referrer-Policy = "strict-origin-when-cross-origin"
